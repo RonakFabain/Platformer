@@ -19,4 +19,16 @@ public class CameraScript : MonoBehaviour
 
         this.transform.position = position;
     }
+    //TODO UI System
+    //TODO Player Health
+    //TODO Enemies
+    //TODO Normals
+    //TODO Audio
+    //TODO Object Pool
+    //TODO Death Effect
+    //TODO Puzzles and Levels
+    
+
+
+    
 }
