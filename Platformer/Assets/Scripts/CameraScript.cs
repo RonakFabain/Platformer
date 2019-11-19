@@ -2,33 +2,82 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO UI System
+//TODO Player Health
+//TODO Enemies
+//TODO Normals
+//TODO Audio
+//TODO Object Pool
+//TODO Death Effect
+//TODO Puzzles and Levels
 public class CameraScript : MonoBehaviour
 {
-    [SerializeField]
-     GameObject objectToFollow;
-    [SerializeField]
-     float speed = 2.0f;
+    [SerializeField] Transform LookAt;
+    [SerializeField] float speed = 2.0f;
+    [SerializeField] float leftMax = 2.0f;
+    [SerializeField] float rightMax = 2.0f;
+    [SerializeField] float downMax = 2.0f;
+    [SerializeField] float topMax = 2.0f;
+    float offset;
+    [SerializeField] float boundX = -20;
+    Vector3 pos;
+    bool move = false;
 
-    void Update()
+
+
+    private void Start()
     {
-        float interpolation = speed * Time.deltaTime;
 
-        Vector3 position = this.transform.position;
-        position.y = Mathf.Lerp(this.transform.position.y, objectToFollow.transform.position.y, interpolation);
-        position.x = Mathf.Lerp(this.transform.position.x, objectToFollow.transform.position.x, interpolation);
-
-        this.transform.position = position;
     }
-    //TODO UI System
-    //TODO Player Health
-    //TODO Enemies
-    //TODO Normals
-    //TODO Audio
-    //TODO Object Pool
-    //TODO Death Effect
-    //TODO Puzzles and Levels
-    
+
+    private void Update()
+    {
+        offset = (LookAt.transform.position.x) - (transform.position.x);
+    }
+    void LateUpdate()
+    {
+
+       
+
+        
+        if (offset >= boundX )
+        {
+            offset = 0;
+            NextLevel();
 
 
-    
+
+        }
+
+
+        pos = new Vector3
+            (
+            Mathf.Clamp(transform.position.x , leftMax, rightMax),
+            Mathf.Clamp(transform.position.y, downMax, topMax),
+            transform.position.z
+            );
+
+        transform.position = pos;
+
+    }
+
+
+
+    void  NextLevel()
+    {
+     
+        transform.position = new Vector3(transform.position.x + 40, transform.position.y, transform.position.z);
+        leftMax += 35;
+        rightMax += 35;
+        StopCoroutine("NextLevel");
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(new Vector2(leftMax, topMax), new Vector2(rightMax, topMax));
+        Gizmos.DrawLine(new Vector2(rightMax, topMax), new Vector2(rightMax, downMax));
+        Gizmos.DrawLine(new Vector2(rightMax, downMax), new Vector2(leftMax, downMax));
+        Gizmos.DrawLine(new Vector2(leftMax, downMax), new Vector2(leftMax, topMax));
+    }
+
 }

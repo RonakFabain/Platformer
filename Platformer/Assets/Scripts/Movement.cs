@@ -237,7 +237,7 @@ public class Movement : MonoBehaviour
 
         Vector2 wallDir = coll.onRightWall ? Vector2.left : Vector2.right;
 
-        Jump((Vector2.up / 1.5f + wallDir / 1.5f), true);
+        Jump((Vector2.up / 1f + wallDir / 1.5f), true);
         if (Input.GetButtonDown("Jump") && !coll.onGround && doubleJump)
         {
             Jump(Vector2.up, false);
@@ -262,6 +262,7 @@ public class Movement : MonoBehaviour
         float push = pushingWall ? 0 : rb.velocity.x;
 
         rb.velocity = new Vector2(push, -slideSpeed);
+        hasDashed = false;
     }
 
     private void Walk(Vector2 dir)
