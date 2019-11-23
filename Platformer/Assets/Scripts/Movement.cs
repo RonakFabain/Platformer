@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
     [Space]
     [Header("Booleans")]
     public bool canMove;
+    public bool isRight=true;
     public bool wallGrab;
     public bool wallJumped;
     public bool wallSlide;
@@ -34,6 +35,7 @@ public class Movement : MonoBehaviour
     private bool hasDashed;
 
     public int side = 1;
+    float x;
 
     [Space]
     [Header("Polish")]
@@ -53,12 +55,13 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
+         x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         float xRaw = Input.GetAxisRaw("Horizontal");
         float yRaw = Input.GetAxisRaw("Vertical");
         Vector2 dir = new Vector2(x, y);
 
+        Flip();
         Walk(dir);
         anim.SetHorizontalMovement(x, y, rb.velocity.y);
 
@@ -264,6 +267,7 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector2(push, -slideSpeed);
         hasDashed = false;
     }
+    
 
     private void Walk(Vector2 dir)
     {

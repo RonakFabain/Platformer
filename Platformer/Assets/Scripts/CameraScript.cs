@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 //TODO UI System
-//TODO Player Health
+//TODO Parallax
 //TODO Enemies
-//TODO Normals
 //TODO Audio
 //TODO Object Pool
 //TODO Death Effect
@@ -71,13 +68,13 @@ public class CameraScript : MonoBehaviour
         rightMax += 35;
         StopCoroutine("NextLevel");
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(new Vector2(leftMax, topMax), new Vector2(rightMax, topMax));
-        Gizmos.DrawLine(new Vector2(rightMax, topMax), new Vector2(rightMax, downMax));
-        Gizmos.DrawLine(new Vector2(rightMax, downMax), new Vector2(leftMax, downMax));
-        Gizmos.DrawLine(new Vector2(leftMax, downMax), new Vector2(leftMax, topMax));
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(new Vector2(leftMax, topMax), new Vector2(rightMax, topMax));
+    //    Gizmos.DrawLine(new Vector2(rightMax, topMax), new Vector2(rightMax, downMax));
+    //    Gizmos.DrawLine(new Vector2(rightMax, downMax), new Vector2(leftMax, downMax));
+    //    Gizmos.DrawLine(new Vector2(leftMax, downMax), new Vector2(leftMax, topMax));
+    //}
 
 }
