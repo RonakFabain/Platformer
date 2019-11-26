@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
 {
 
-    protected float health;
+    protected float health=100;
     protected float currentHealth;
     protected bool isDead;
     protected bool isRight;
@@ -14,14 +15,24 @@ public abstract class EnemyBase : MonoBehaviour
     protected abstract void Move();
     protected virtual void Attack() { }
 
-    protected void TakeDamage(int dmgAmount)
+    protected void Start()
+    {
+        currentHealth = health;
+    }
+
+    public void TakeDamage(int dmgAmount)
     {
         currentHealth -= dmgAmount;
+        Animate();
     }
 
     protected void Update()
     {
         isDead = currentHealth <= 0 ? true : false;
+        if (isDead)
+            Destroy(gameObject);
     }
 
+    virtual protected void Animate() { }
+        
 }

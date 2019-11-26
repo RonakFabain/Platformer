@@ -9,7 +9,7 @@
 //TODO Puzzles and Levels
 public class CameraScript : MonoBehaviour
 {
-    [SerializeField] Transform LookAt;
+   
     [SerializeField] float speed = 2.0f;
     [SerializeField] float leftMax = 2.0f;
     [SerializeField] float rightMax = 2.0f;
@@ -29,7 +29,7 @@ public class CameraScript : MonoBehaviour
 
     private void Update()
     {
-        offset = (LookAt.transform.position.x) - (transform.position.x);
+       // offset = (LookAt.transform.position.x) - (transform.position.x);
     }
     void LateUpdate()
     {
