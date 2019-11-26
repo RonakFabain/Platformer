@@ -9,8 +9,9 @@ public class RangedEnemy : EnemyBase
     [SerializeField] Transform bulletStartPos;
     private Quaternion rotInit;
     
-    void Start()
+    new void Start()
     {
+        base.Start();
         speed = 1;
         isRight = true;
     }
@@ -32,7 +33,7 @@ public class RangedEnemy : EnemyBase
 
             if (hit.collider.tag.Equals("Wall"))
             {
-                Debug.Log("HIT");
+               
                 transform.Rotate(0, 180, 0);
                 isRight = !isRight;
             }
@@ -59,7 +60,7 @@ public class RangedEnemy : EnemyBase
         {
             timer = 0;
             // Instantiate(bullet, transform.position, rotInit);
-            ObjectPoolManager.Instance.SpawnFromPool("EnemyBullet", transform.position, rotInit);
+            ObjectPoolManager.Instance.SpawnFromPool("EnemyBullet", bulletStartPos.transform.position, rotInit);
         }
     }
 

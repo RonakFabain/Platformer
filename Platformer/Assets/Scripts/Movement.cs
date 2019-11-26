@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
     private bool hasDashed;
 
     public int side = 1;
-    float x;
+    public float x;
 
     [Space]
     [Header("Polish")]
@@ -268,7 +268,11 @@ public class Movement : MonoBehaviour
         hasDashed = false;
     }
     
-
+    void Flip()
+    {
+        if (x < 0) transform.localRotation =  Quaternion.Euler( new Vector3( 0, 180, 0));
+        if (x > 0) transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    }
     private void Walk(Vector2 dir)
     {
         if (!canMove)
