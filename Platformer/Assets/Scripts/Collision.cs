@@ -24,12 +24,17 @@ public class Collision : MonoBehaviour
     public Vector2 bottomOffset, rightOffset, leftOffset;
     private Color debugCollisionColor = Color.red;
 
-   
+    PlayerSpawner playerSpawner;
+
+    private void Start()
+    {
+        playerSpawner = FindObjectOfType<PlayerSpawner>();
+    }
     // Update is called once per frame
     void Update()
-    {  
+    {
         onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
-        onWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer) 
+        onWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer)
             || Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer);
 
         onRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
@@ -44,8 +49,16 @@ public class Collision : MonoBehaviour
 
         var positions = new Vector2[] { bottomOffset, rightOffset, leftOffset };
 
-        Gizmos.DrawWireSphere((Vector2)transform.position  + bottomOffset, collisionRadius);
+        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, collisionRadius);
         Gizmos.DrawWireSphere((Vector2)transform.position + rightOffset, collisionRadius);
         Gizmos.DrawWireSphere((Vector2)transform.position + leftOffset, collisionRadius);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Death"))
+        {
+           gameObject.transform.position  = playerSpawner.Respawn();
+        }
     }
 }

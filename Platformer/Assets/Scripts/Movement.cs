@@ -61,7 +61,8 @@ public class Movement : MonoBehaviour
         float yRaw = Input.GetAxisRaw("Vertical");
         Vector2 dir = new Vector2(x, y);
 
-        Flip();
+       //Flip();
+
         Walk(dir);
         anim.SetHorizontalMovement(x, y, rb.velocity.y);
 

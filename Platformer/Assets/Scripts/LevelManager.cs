@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    enum MenuType { MainMenu, Running, PauseMenu, Credits }
+    enum MenuType { MainMenu, Running, PauseMenu, Credits,Levels }
     MenuType type;
 
     public static LevelManager Instance;
@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject Running;
     [SerializeField] GameObject Pause;
     [SerializeField] GameObject Credits;
+    [SerializeField] GameObject Levels;
 
     private void Awake()
     {
@@ -42,6 +43,11 @@ public class LevelManager : MonoBehaviour
         type = MenuType.Running;
         SelectMenu(type);
 
+    }
+    public void PlayGame()
+    {
+        type = MenuType.Levels;
+        SelectMenu(type);
     }
 
     public void QuitApplication()
@@ -75,6 +81,7 @@ public class LevelManager : MonoBehaviour
                 MainMenu.SetActive(false);
                 Pause.SetActive(false);
                 Credits.SetActive(false);
+                Levels.SetActive(false);
 
                 break;
             case MenuType.MainMenu:
@@ -83,19 +90,31 @@ public class LevelManager : MonoBehaviour
                 MainMenu.SetActive(true);
                 Pause.SetActive(false);
                 Credits.SetActive(false);
+                Levels.SetActive(false);
                 break;
             case MenuType.PauseMenu:
                 Running.SetActive(false);
                 MainMenu.SetActive(false);
                 Pause.SetActive(true);
                 Credits.SetActive(false);
+                Levels.SetActive(false);
                 break;
             case MenuType.Credits:
                 Running.SetActive(false);
                 MainMenu.SetActive(false);
                 Pause.SetActive(false);
                 Credits.SetActive(true);
+                Levels.SetActive(false);
                 break;
+
+            case MenuType.Levels:
+                Running.SetActive(false);
+                MainMenu.SetActive(false);
+                Pause.SetActive(false);
+                Credits.SetActive(false);
+                Levels.SetActive(true);
+                break;
+
         }
 
     }
