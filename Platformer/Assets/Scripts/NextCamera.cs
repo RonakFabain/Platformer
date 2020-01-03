@@ -4,10 +4,10 @@ public class NextCamera : MonoBehaviour
 {
     [SerializeField] GameObject nextCamera;
     [SerializeField] Vector3 trans;
-    PlayerSpawner playerSpawner;
+    LevelManager playerSpawner;
     private void Start()
     {
-        playerSpawner = FindObjectOfType<PlayerSpawner>();
+        playerSpawner = FindObjectOfType<LevelManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -24,11 +24,11 @@ public class Collision : MonoBehaviour
     public Vector2 bottomOffset, rightOffset, leftOffset;
     private Color debugCollisionColor = Color.red;
 
-    PlayerSpawner playerSpawner;
+    LevelManager playerSpawner;
 
     private void Start()
     {
-        playerSpawner = FindObjectOfType<PlayerSpawner>();
+        playerSpawner = FindObjectOfType<LevelManager>();
     }
     // Update is called once per frame
     void Update()

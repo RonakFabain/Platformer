@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-
-
     float timer;
     [SerializeField] float rateOfFire;
     [SerializeField] GameObject bullet;

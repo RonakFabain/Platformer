@@ -1,121 +1,70 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
 
 public class LevelManager : MonoBehaviour
 {
-    enum MenuType { MainMenu, Running, PauseMenu, Credits,Levels }
-    MenuType type;
 
-    public static LevelManager Instance;
+    [HideInInspector]
+    public int noOfDeaths = 10;
+    public List<Vector3> spawnPoints = new List<Vector3>();
 
-    [SerializeField] GameObject MainMenu;
-    [SerializeField] GameObject Running;
-    [SerializeField] GameObject Pause;
-    [SerializeField] GameObject Credits;
-    [SerializeField] GameObject Levels;
+    int currentSpawnIndex = 0;
+
+    Level levelObject;
+
+
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-
         DontDestroyOnLoad(this);
     }
-    private void Start()
-    {
-        type = MenuType.MainMenu;
-        SelectMenu(type);
-    }
-    public void Mute()
+    void Start()
     {
 
-    }
-    public void ReloadLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void LoadScene(int id)
-    {
-        SceneManager.LoadScene(id);
-        type = MenuType.Running;
-        SelectMenu(type);
-
-    }
-    public void PlayGame()
-    {
-        type = MenuType.Levels;
-        SelectMenu(type);
-    }
-
-    public void QuitApplication()
-    {
-        Application.Quit();
-    }
-
-    public void OnPause()
-    {
-        type = MenuType.PauseMenu;
-        SelectMenu(type);
-        Time.timeScale = 0;
-      
-    }
-    public void Resume()
-    {
-        type = MenuType.Running;
-        SelectMenu(type);
-        Time.timeScale = 1;
-       
-
-    }
-
-    void SelectMenu(MenuType type)
-    {
-        switch (type)
+        foreach (Transform g in transform)
         {
-
-            case MenuType.Running:
-                Running.SetActive(true);
-                MainMenu.SetActive(false);
-                Pause.SetActive(false);
-                Credits.SetActive(false);
-                Levels.SetActive(false);
-
-                break;
-            case MenuType.MainMenu:
-
-                Running.SetActive(false);
-                MainMenu.SetActive(true);
-                Pause.SetActive(false);
-                Credits.SetActive(false);
-                Levels.SetActive(false);
-                break;
-            case MenuType.PauseMenu:
-                Running.SetActive(false);
-                MainMenu.SetActive(false);
-                Pause.SetActive(true);
-                Credits.SetActive(false);
-                Levels.SetActive(false);
-                break;
-            case MenuType.Credits:
-                Running.SetActive(false);
-                MainMenu.SetActive(false);
-                Pause.SetActive(false);
-                Credits.SetActive(true);
-                Levels.SetActive(false);
-                break;
-
-            case MenuType.Levels:
-                Running.SetActive(false);
-                MainMenu.SetActive(false);
-                Pause.SetActive(false);
-                Credits.SetActive(false);
-                Levels.SetActive(true);
-                break;
-
+            spawnPoints.Add(g.transform.position);
         }
+    }
+
+    public void NextSpawnPoint()
+    {
+        currentSpawnIndex++;
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            EndLevel();
+        }
+    }
+
+    public int SendScore()
+    {
+        //calculate number of deaths
+
+        return noOfDeaths;
+    }
+
+    public void EndLevel()
+    {
+        int currentLevel = 0;
+
+        UIManager.Instance.LevelSelect();
+        UIManager.Instance.levelList[currentLevel++].score = noOfDeaths;
+        //   sendScore(); to ui manager
+        //Call LevelManager and start next level
+
+        noOfDeaths = 0;
+    }
+
+
+    public Vector3 Respawn()
+    {
+        noOfDeaths++;
+        return spawnPoints[currentSpawnIndex];
 
     }
 }
