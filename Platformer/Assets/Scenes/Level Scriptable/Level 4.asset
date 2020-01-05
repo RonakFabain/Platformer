@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: Level 4
   m_EditorClassIdentifier: 
   levelName: 4
-  isUnlocked: 1
+  isUnlocked: 0
   score: 0
+  stars: {fileID: 0}

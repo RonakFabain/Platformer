@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     public List<Level> levelList = new List<Level>();
 
-    public static UIManager Instance;
+
 
     [SerializeField] GameObject MainMenu;
     [SerializeField] GameObject Running;
@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject Credits;
     [SerializeField] GameObject Levels;
 
+    #region SingletonUIManager
+    public static UIManager Instance;
     private void Awake()
     {
         if (Instance == null)
@@ -28,29 +30,41 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(this);
-        
-    }
 
-    void InitLevelUI()
+    }
+    #endregion
+
+
+    public void InitLevelUI()
     {
 
         for (int i = 0; i < levelList.Count; i++)
         {
-            if (GameObject.Find(i.ToString()) != null)
+            GameObject go = GameObject.Find(i.ToString());
+
+
+            GameObject goUI = GameObject.Find((SceneManager.GetActiveScene().buildIndex -1 ).ToString());
+           
+            if (go != null)
             {
                 //Enable and Disable Levels
-                if (GameObject.Find(i.ToString()).GetComponent<Button>() != null)
+                if (go.GetComponent<Button>() != null)
                 {
 
                     if (levelList[i].isUnlocked == 0)
                     {
-                        GameObject.Find(i.ToString()).GetComponent<Button>().interactable = false;
+                        go.GetComponent<Button>().interactable = false;
                     }
                     else
-                        GameObject.Find(i.ToString()).GetComponent<Button>().interactable = true;
+                    {
+                        go.GetComponentInChildren<Text>().text = levelList[i].score.ToString();
+
+                        goUI.transform.GetChild(1).GetComponentInChildren<Image>().sprite = levelList[i].stars;
+                        go.GetComponent<Button>().interactable = true;
+                    }
                 }
 
-
+             
                 //Assign Stars
             }
 
@@ -62,12 +76,20 @@ public class UIManager : MonoBehaviour
         InitLevelUI();
         menuType = MenuType.MainMenu;
         SelectMenu(menuType);
-        
+
     }
+
     public void Mute()
     {
 
     }
+    public void Menu()
+    {
+        menuType = MenuType.MainMenu;
+        SelectMenu(menuType);
+
+    }
+
     public void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
