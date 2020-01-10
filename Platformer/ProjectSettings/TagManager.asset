@@ -9,6 +9,8 @@ TagManager:
   - EnemyBullet
   - PlayerBullet
   - Explosion
+  - Death
+  - Level
   layers:
   - Default
   - TransparentFX

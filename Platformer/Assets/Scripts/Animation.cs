@@ -7,12 +7,10 @@ public class Animation : MonoBehaviour
 
     [SerializeField] Animator anim;
     Movement movement;
-    PlayerHealth playerHealth;
     void Start()
     {
         anim = GetComponent<Animator>();
         movement = GetComponentInParent<Movement>();
-        playerHealth = GetComponentInParent<PlayerHealth>();
     }
 
 
@@ -25,11 +23,7 @@ public class Animation : MonoBehaviour
             anim.SetBool("isFalling", movement.rb.velocity.y < 0);
 
 
-            if (playerHealth.isHit)
-                anim.SetTrigger("isHit");
-
-            if (Input.GetKeyDown(KeyCode.E))
-                anim.SetTrigger("isShooting");
+          
 
         }
 

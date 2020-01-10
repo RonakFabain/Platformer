@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-
-
     float timer;
     [SerializeField] float rateOfFire;
     [SerializeField] GameObject bullet;
@@ -26,7 +24,7 @@ public class Shooting : MonoBehaviour
         if (timer >= rateOfFire)
         {
             timer = 0;
-            ObjectPoolManager.Instance.SpawnFromPool("EnemyBullet", bulletPos.position, transform.rotation);
+            ObjectPoolManager.Instance.SpawnFromPool("Explosion", bulletPos.position, transform.rotation);
         }
     }
 }
