@@ -14,4 +14,3 @@ MonoBehaviour:
   levelName: 2
   isUnlocked: 1
   score: 0
-  stars: {fileID: 21300000, guid: 9788d0f62dc903f408813cdca64c4ed4, type: 3}

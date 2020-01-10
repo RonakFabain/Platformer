@@ -58,14 +58,12 @@ public class UIManager : MonoBehaviour
                     else
                     {
                         go.GetComponentInChildren<Text>().text = levelList[i].score.ToString();
-
-                        goUI.transform.GetChild(1).GetComponentInChildren<Image>().sprite = levelList[i].stars;
                         go.GetComponent<Button>().interactable = true;
                     }
                 }
 
              
-                //Assign Stars
+               
             }
 
 

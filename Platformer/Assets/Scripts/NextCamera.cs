@@ -25,7 +25,6 @@ public class NextCamera : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
             this.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
             this.gameObject.GetComponent<NextCamera>().enabled = false;
             playerSpawner.NextSpawnPoint();

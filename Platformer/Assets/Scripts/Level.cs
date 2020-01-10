@@ -9,5 +9,5 @@ public class Level : ScriptableObject
     public int levelName;
     public int isUnlocked;
     public int score;
-    public Sprite stars;
+
 }

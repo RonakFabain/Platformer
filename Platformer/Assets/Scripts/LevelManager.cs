@@ -18,7 +18,6 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-
         foreach (Transform g in transform)
         {
             spawnPoints.Add(g.transform.position);
